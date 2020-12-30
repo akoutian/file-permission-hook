@@ -4,8 +4,8 @@ import sys
 
 
 def main():
-    print("argc: %d" % len(sys.argv))
-    print("argv: %s" % sys.argv)
+    print(f"argc: {len(sys.argv)}")
+    print(f"argv: {sys.argv}")
 
     exit(0)
 
