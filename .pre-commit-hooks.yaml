@@ -1,6 +1,6 @@
--   id: file-permissions
-    name: Check file permissions
-    description: This hook prevents text files from being commited as executables
-    entry: file-permission.py
+-   id: file-permission-checker
+    name: File Permission Check
+    description: Prevents text files from being commited as executables.
+    entry: file-permission-checker
     language: python
     types: [text]
