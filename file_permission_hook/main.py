@@ -3,8 +3,11 @@
 import sys
 import argparse
 
+from file_permission_hook.subprocess_wrapper import git_wrapper
+
 
 def check_files(paths):
+    git_wrapper()
     exit(1)
 
 
