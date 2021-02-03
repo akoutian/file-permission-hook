@@ -10,7 +10,7 @@ def check_files(paths: List[str]) -> int:
     for path in paths:
         git_output = git_wrapper(path)
         print(git_output)
-    exit(1)
+    return False
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
