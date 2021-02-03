@@ -6,7 +6,8 @@ from file_permission_hook.subprocess_wrapper import git_wrapper
 
 def check_files(args):
     for path in args.filenames:
-        git_wrapper(path)
+        git_output = git_wrapper(path)
+        print(git_output)
     exit(1)
 
 
