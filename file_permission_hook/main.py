@@ -15,9 +15,9 @@ def check_files(paths: List[str]) -> int:
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("filenames", nargs="*")
+    parser.add_argument("paths", nargs="*")
 
-    return check_files(parser.parse_args().filenames)
+    return check_files(parser.parse_args().paths)
 
 
 if __name__ == "__main__":
