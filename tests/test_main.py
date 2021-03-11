@@ -5,7 +5,7 @@ from file_permission_hook import main
 
 class TestMain(unittest.TestCase):
     def test_main(self):
-        self.assertEqual(main.main(), 0)
+        self.assertEqual(main.main(), 1)
 
 
 if __name__ == "__main__":
