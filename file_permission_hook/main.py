@@ -1,7 +1,7 @@
 import sys
 import argparse
 
-from file_permission_hook.subprocess_wrapper import git_wrapper
+from file_permission_hook import subprocess_wrapper
 
 from typing import List
 
@@ -15,7 +15,7 @@ def split_git_output(output: str) -> List[str]:
 
 def is_something_wrong(paths: List[str]) -> int:
     for path in paths:
-        git_output = git_wrapper(path)
+        git_output = subprocess_wrapper.git_wrapper(path)
         split_git_output(git_output)
     # true == 1 thereby pre-commit will see it as failed
     return True
