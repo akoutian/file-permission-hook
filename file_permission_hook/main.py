@@ -6,6 +6,7 @@ from file_permission_hook import subprocess_wrapper
 
 
 def split_git_output(output: str) -> List[str]:
+    # TODO: what if git output is empty?
     output_split = output.split("\0")
     for line in output_split:
         print(line)
