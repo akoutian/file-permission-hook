@@ -1,6 +1,6 @@
 import unittest
 
-from file_permission_hook import main
+from src import main
 
 
 class TestMain(unittest.TestCase):

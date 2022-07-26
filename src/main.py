@@ -2,7 +2,7 @@ import sys
 import argparse
 from typing import List
 
-from file_permission_hook import subprocess_wrapper
+from src import subprocess_wrapper
 
 
 def split_git_output(output: str) -> List[str]:
