@@ -14,6 +14,19 @@ def git_wrapper(path: str) -> str:
     return subp.stdout
 
 
+def stat_wrapper(path: str) -> str:
+    subp = subprocess.run(
+        ["stat", "-c", "%a", path],
+        capture_output=True,
+        encoding="UTF-8",
+    )
+
+    if subp.returncode != 0:
+        raise RuntimeError(subp.stderr)
+
+    return subp.stdout
+
+
 def chmod_wrapper(path: str):
     subp = subprocess.run(
         ["chmod", "-x", path],

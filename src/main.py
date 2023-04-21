@@ -7,19 +7,30 @@ from src import subprocess_wrapper
 
 def check(paths: List[str]) -> int:
     for path in paths:
-        status = subprocess_wrapper.git_wrapper(path)
+        git_status = subprocess_wrapper.git_wrapper(path)
+        stat = subprocess_wrapper.stat_wrapper(path)
 
-        if not status:
-            return False
+        if git_status:
+            mode = git_status.split(" ")[4][-3:]
 
-        mode = status.split(" ")[4][-3:]
+            if int(mode[0]) % 2 != 0:
+                print(
+                    f"staged file '{path}' has executable bit set for user, running 'chmod -x' ..."
+                )
 
-        if int(mode[0]) % 2 != 0:
-            print(
-                f"staged file '{path}' has executable bit set for user, running 'chmod -x' ..."
-            )
-            subprocess_wrapper.chmod_wrapper(path)
-            return True
+                subprocess_wrapper.chmod_wrapper(path)
+
+                return True
+
+        if stat:
+            if int(stat[0]) % 2 != 0:
+                print(
+                    f"tracked file '{path}' has executable bit set for user, running 'chmod -x' ..."
+                )
+
+                subprocess_wrapper.chmod_wrapper(path)
+
+                return True
 
     return False
 
