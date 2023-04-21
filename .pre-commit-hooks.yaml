@@ -1,6 +1,6 @@
 -   id: file-permission-checker
     name: File Permission Check
     description: Prevents text files from being commited as executables.
-    entry: file-permission-checker
+    entry: check-file-permissions
     language: python
     types: [text]
