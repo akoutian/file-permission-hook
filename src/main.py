@@ -2,9 +2,18 @@
 
 import sys
 import argparse
-from typing import List
 
 from src import subprocess_wrapper
+from typing import List
+
+
+def fix(mode: int, path: str) -> bool:
+    if int(mode[0]) % 2 != 0:
+        print(f"file '{path}' has executable bit set for user, running 'chmod -x' ...")
+        subprocess_wrapper.chmod_wrapper(path)
+        return True
+
+    return False
 
 
 def check(paths: List[str]) -> int:
@@ -14,24 +23,11 @@ def check(paths: List[str]) -> int:
 
         if git_status:
             mode = git_status.split(" ")[4][-3:]
-
-            if int(mode[0]) % 2 != 0:
-                print(
-                    f"staged file '{path}' has executable bit set for user, running 'chmod -x' ..."
-                )
-
-                subprocess_wrapper.chmod_wrapper(path)
-
+            if fix(mode, path):
                 return True
 
         if stat:
-            if int(stat[0]) % 2 != 0:
-                print(
-                    f"tracked file '{path}' has executable bit set for user, running 'chmod -x' ..."
-                )
-
-                subprocess_wrapper.chmod_wrapper(path)
-
+            if fix(stat, path):
                 return True
 
     return False
