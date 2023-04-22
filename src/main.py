@@ -7,7 +7,7 @@ from src import subprocess_wrapper
 from typing import List
 
 
-def fix(mode: int, path: str) -> bool:
+def fix(mode: str, path: str) -> bool:
     if int(mode[0]) % 2 != 0:
         print(f"file '{path}' has executable bit set for user, running 'chmod -x' ...")
         subprocess_wrapper.chmod_wrapper(path)
@@ -17,6 +17,8 @@ def fix(mode: int, path: str) -> bool:
 
 
 def check(paths: List[str]) -> int:
+    modified = False
+
     for path in paths:
         git_status = subprocess_wrapper.git_wrapper(path)
         stat = subprocess_wrapper.stat_wrapper(path)
@@ -24,13 +26,15 @@ def check(paths: List[str]) -> int:
         if git_status:
             mode = git_status.split(" ")[4][-3:]
             if fix(mode, path):
-                return True
+                modified = True
+                continue
 
         if stat:
             if fix(stat, path):
-                return True
+                modified = True
+                continue
 
-    return False
+    return modified
 
 
 def main() -> int:
